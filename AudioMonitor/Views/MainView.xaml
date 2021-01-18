@@ -1,0 +1,14 @@
+﻿<Controls:MetroWindow x:Class="AudioMonitor.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:viewModels="clr-namespace:AudioMonitor.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        Title="Audio Monitor" Height="450" Width="800">
+    <Grid>
+        <Image></Image>
+    </Grid>
+</Controls:MetroWindow>
