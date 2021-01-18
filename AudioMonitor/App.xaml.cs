@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using AudioMonitor.Services;
 using AudioMonitor.ViewModels;
 using AudioMonitor.Views;
 using Microsoft.Extensions.Configuration;
@@ -48,6 +49,8 @@ namespace AudioMonitor {
 
             services.AddSingleton<MainView>();
             services.AddSingleton<MainViewModel>();
+
+            services.AddSingleton<IRenderer, Renderer>();
         }
     }
 }

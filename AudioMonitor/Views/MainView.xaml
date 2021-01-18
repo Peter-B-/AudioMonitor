@@ -9,6 +9,6 @@
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Title="Audio Monitor" Height="450" Width="800">
     <Grid>
-        <Image></Image>
+        <Image Source="{Binding LevelBmp}"/>
     </Grid>
 </Controls:MetroWindow>
