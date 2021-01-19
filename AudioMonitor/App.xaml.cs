@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using AudioMonitor.Interfaces;
 using AudioMonitor.Services;
 using AudioMonitor.ViewModels;
 using AudioMonitor.Views;
@@ -51,6 +52,9 @@ namespace AudioMonitor {
             services.AddSingleton<MainViewModel>();
 
             services.AddSingleton<IRenderer, Renderer>();
+            services.AddSingleton<IAudioSource, AudioSource>();
+
+            services.AddScoped<ICalculator, Calculator>();
         }
     }
 }
