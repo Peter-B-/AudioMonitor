@@ -7,8 +7,13 @@
         xmlns:viewModels="clr-namespace:AudioMonitor.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
-        Title="Audio Monitor" Height="450" Width="800">
+        Title="Audio Monitor" Height="800" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <Image Source="{Binding LevelBmp}"/>
+        <Image Grid.Row="1" Source="{Binding FftBmp}"/>
     </Grid>
 </Controls:MetroWindow>

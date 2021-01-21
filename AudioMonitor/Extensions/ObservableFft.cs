@@ -47,7 +47,7 @@ namespace AudioMonitor.Extensions
                         {
                             var value = wave.ShortBuffer[i];
                             fftBuffer[fftPos].X =
-                                (float) (value * FastFourierTransform.HammingWindow(fftPos, fftLength));
+                                (float) (value * FastFourierTransform.HannWindow(fftPos, fftLength));
                             fftBuffer[fftPos].Y = 0;
                             fftPos++;
                             if (fftPos >= fftBuffer.Length)
@@ -57,7 +57,8 @@ namespace AudioMonitor.Extensions
 
                                 var result =
                                     fftBuffer
-                                        .Select(GetLogPercent)
+                                        .Take(fftLength / 2)
+                                        .Select(GetDb)
                                         .ToArray();
                                 obs.OnNext(result);
                             }
@@ -68,15 +69,11 @@ namespace AudioMonitor.Extensions
                 );
         }
 
-        private float GetLogPercent(Complex c)
+        private float GetDb(Complex c)
         {
             // not entirely sure whether the multiplier should be 10 or 20 in this case.
             // going with 10 from here http://stackoverflow.com/a/10636698/7532
-            var intensityDB = (float) (10 * Math.Log10(Math.Sqrt(c.X * c.X + c.Y * c.Y)));
-            var minDB = -90f;
-            if (intensityDB < minDB) intensityDB = minDB;
-            var percent = intensityDB / minDB;
-            return percent;
+            return (float) (10 * Math.Log10(Math.Sqrt(c.X * c.X + c.Y * c.Y)));
         }
     }
 }

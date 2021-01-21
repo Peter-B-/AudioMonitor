@@ -1,8 +1,12 @@
 using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Concurrency;
 using System.Windows.Media.Imaging;
+using AudioMonitor.Extensions;
 using AudioMonitor.Interfaces;
 using AudioMonitor.Services;
 using TinyLittleMvvm;
@@ -11,24 +15,44 @@ namespace AudioMonitor.ViewModels
 {
     public class MainViewModel : PropertyChangedBase
     {
-        private readonly IRenderer renderer;
-        private readonly IAudioSource audioSource;
-        public BitmapSource LevelBmp => renderer.LevelBmp;
+        private readonly ILineRenderer lineRenderer;
+        private readonly IFftRenderer fftRenderer;
 
-        public MainViewModel(IRenderer renderer, IAudioSource audioSource, ICalculator calculator)
+        public BitmapSource LevelBmp => lineRenderer.Bitmap;
+        public BitmapSource FftBmp => fftRenderer.Bitmap;
+
+        public MainViewModel(ILineRenderer lineRenderer, IFftRenderer fftRenderer, IAudioSource audioSource, ICalculator calculator)
         {
-            this.renderer = renderer;
-            this.audioSource = audioSource;
+            this.lineRenderer = lineRenderer;
+            this.fftRenderer = fftRenderer;
 
             var device = audioSource.EnumerateDevices().FirstOrDefault();
 
             if (device == null) return;
 
-            audioSource.GetStream(device)
+            var audioStream = 
+                audioSource.GetStream(device)
+                    .Publish()
+                    .RefCount();
+
+            audioStream
                 .Select(calculator.GetRms)
-                .Buffer(renderer.Width, 1)
+                .Buffer(lineRenderer.Width, 1)
                 .ObserveOnDispatcher()
-                .Subscribe(renderer.Render);
+                .Subscribe(lineRenderer.Render);
+
+            audioStream
+                .CalculateFft()
+                .ObserveOnDispatcher()
+                .Subscribe(fftRenderer.Render);
+
+            audioStream
+                .CalculateFft()
+                .Subscribe(d =>
+                {
+                    var line = string.Join(';', d.Select(v => v.ToString("F3", CultureInfo.InvariantCulture)));
+                    File.AppendAllLines(@"d:\temp\fft.csv", new []{line});
+                });
         }
     }
 }

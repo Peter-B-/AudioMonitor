@@ -51,10 +51,13 @@ namespace AudioMonitor {
             services.AddSingleton<MainView>();
             services.AddSingleton<MainViewModel>();
 
-            services.AddSingleton<IRenderer, Renderer>();
+            services.AddSingleton<ILineRenderer, LineRenderer>();
+            services.AddSingleton<IFftRenderer, FftRenderer>();
             services.AddSingleton<IAudioSource, AudioSource>();
 
             services.AddScoped<ICalculator, Calculator>();
+
+            services.AddSingleton<IColorPalette>(new ColorPaletteViridis(-10, 30));
         }
     }
 }
