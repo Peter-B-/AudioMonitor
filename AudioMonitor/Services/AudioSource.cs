@@ -30,11 +30,15 @@ namespace AudioMonitor.Services
                 {
                     var disposables = new CompositeDisposable();
 
+                    var samples = 512;
+                    var timeMs = 20;
+                    var rate = samples * 1000 / timeMs;
+
                     var waveIn = new WaveInEvent()
                     {
                         DeviceNumber = device.DeviceNumber,
-                        WaveFormat = new WaveFormat(25600, 16, 1),
-                        BufferMilliseconds = 20
+                        WaveFormat = new WaveFormat(rate, 16, 1),
+                        BufferMilliseconds = timeMs
 
                     };
 

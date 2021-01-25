@@ -62,7 +62,7 @@ namespace AudioMonitor.ViewModels
                 ;
 
             audioStream
-                .CalculateFft(512)
+                .CalculateFft(fftRenderer.Height * 2)
                 .ObserveOnDispatcher()
                 .Subscribe(fftRenderer.Render)
                 .AddDisposableTo(disp)
