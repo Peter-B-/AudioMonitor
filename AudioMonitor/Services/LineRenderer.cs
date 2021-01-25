@@ -49,7 +49,7 @@ namespace AudioMonitor.Services
 
         public float Scale { get; } = 4;
         public int Width { get; } = 800;
-        public int Height { get; } = 512;
+        public int Height { get; } = 256;
 
         public BitmapSource Bitmap => levelBmp;
     }

@@ -33,8 +33,9 @@ namespace AudioMonitor.Services
                     var waveIn = new WaveInEvent()
                     {
                         DeviceNumber = device.DeviceNumber,
-                        WaveFormat = new WaveFormat(14000, 16, 1),
-                        BufferMilliseconds = 10
+                        WaveFormat = new WaveFormat(25600, 16, 1),
+                        BufferMilliseconds = 20
+
                     };
 
                     var subscription =

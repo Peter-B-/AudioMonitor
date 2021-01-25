@@ -46,8 +46,7 @@ namespace AudioMonitor.Extensions
                         for (var i = 0; i < wave.ShortBufferCount; i++)
                         {
                             var value = wave.ShortBuffer[i];
-                            fftBuffer[fftPos].X =
-                                (float) (value * FastFourierTransform.HannWindow(fftPos, fftLength));
+                            fftBuffer[fftPos].X = (float) (value * FastFourierTransform.HannWindow(fftPos, fftLength));
                             fftBuffer[fftPos].Y = 0;
                             fftPos++;
                             if (fftPos >= fftBuffer.Length)

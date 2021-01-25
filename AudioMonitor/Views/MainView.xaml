@@ -10,10 +10,10 @@
         Title="Audio Monitor" Height="800" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition MaxHeight="256"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Image Source="{Binding LevelBmp}"/>
-        <Image Grid.Row="1" Source="{Binding FftBmp}"/>
+        <Image Source="{Binding LevelBmp}" StretchDirection="Both" Stretch="Fill"/>
+        <Image Grid.Row="1" Source="{Binding FftBmp}" StretchDirection="Both" Stretch="Fill"/>
     </Grid>
 </Controls:MetroWindow>

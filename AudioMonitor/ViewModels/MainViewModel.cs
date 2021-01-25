@@ -42,17 +42,9 @@ namespace AudioMonitor.ViewModels
                 .Subscribe(lineRenderer.Render);
 
             audioStream
-                .CalculateFft()
+                .CalculateFft(512)
                 .ObserveOnDispatcher()
                 .Subscribe(fftRenderer.Render);
-
-            audioStream
-                .CalculateFft()
-                .Subscribe(d =>
-                {
-                    var line = string.Join(';', d.Select(v => v.ToString("F3", CultureInfo.InvariantCulture)));
-                    File.AppendAllLines(@"d:\temp\fft.csv", new []{line});
-                });
         }
     }
 }
