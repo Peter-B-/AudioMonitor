@@ -10,10 +10,12 @@
         Title="Audio Monitor" Height="800" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height ="Auto"/>
             <RowDefinition MaxHeight="256"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Image Source="{Binding LevelBmp}" StretchDirection="Both" Stretch="Fill"/>
-        <Image Grid.Row="1" Source="{Binding FftBmp}" StretchDirection="Both" Stretch="Fill"/>
+        <ComboBox ItemsSource="{Binding Devices, Mode=OneTime}" SelectedItem="{Binding SelectedDevice}" />
+        <Image Grid.Row="1" Source="{Binding LevelBmp}" StretchDirection="Both" Stretch="Fill"/>
+        <Image Grid.Row="2" Source="{Binding FftBmp}" StretchDirection="Both" Stretch="Fill"/>
     </Grid>
 </Controls:MetroWindow>

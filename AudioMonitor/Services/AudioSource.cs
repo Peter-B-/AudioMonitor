@@ -42,7 +42,10 @@ namespace AudioMonitor.Services
                         Observable.FromEventPattern<WaveInEventArgs>(
                                 h => waveIn.DataAvailable += h,
                                 h => waveIn.DataAvailable -= h)
-                            .Where(e => e.EventArgs.BytesRecorded > 0)
+                            .Where(e => 
+                                // Remove events where Buffer is not filled completely.
+                                // This will happen, when recording is stopped.
+                                e.EventArgs.BytesRecorded == e.EventArgs.Buffer.Length)
                             .Select(e =>
                             {
                                 var buffer = new WaveBuffer(e.EventArgs.Buffer)
