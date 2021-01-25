@@ -15,7 +15,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <ComboBox ItemsSource="{Binding Devices, Mode=OneTime}" SelectedItem="{Binding SelectedDevice}" />
-        <Image Grid.Row="1" Source="{Binding LevelBmp}" StretchDirection="Both" Stretch="Fill"/>
-        <Image Grid.Row="2" Source="{Binding FftBmp}" StretchDirection="Both" Stretch="Fill"/>
+        <Image Grid.Row="1" Source="{Binding LevelBmp}" StretchDirection="Both" Stretch="Fill" />
+        <Image Grid.Row="2" Source="{Binding FftBmp}" StretchDirection="Both" Stretch="Fill" />
     </Grid>
 </Controls:MetroWindow>

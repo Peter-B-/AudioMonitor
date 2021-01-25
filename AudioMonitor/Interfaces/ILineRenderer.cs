@@ -5,7 +5,7 @@ namespace AudioMonitor.Interfaces
 {
     public interface ILineRenderer : IRenderer
     {
-        void Render(IList<float> rmsValues);
+        void Render(float rmsValues);
         float Scale { get; }
     }
 }

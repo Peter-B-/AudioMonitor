@@ -56,9 +56,8 @@ namespace AudioMonitor.ViewModels
 
             audioStream
                 .Select(calculator.GetRms)
-                .Buffer(lineRenderer.Width, 1)
                 .ObserveOnDispatcher()
-                .Subscribe(lineRenderer.Render)
+                .Subscribe(rmsValues => lineRenderer.Render(rmsValues))
                 .AddDisposableTo(disp)
                 ;
 
