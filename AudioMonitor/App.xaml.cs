@@ -57,7 +57,8 @@ namespace AudioMonitor {
 
             services.AddScoped<ICalculator, Calculator>();
 
-            services.AddSingleton<IColorPalette>(new ColorPaletteViridis(-10, 30));
+            //services.AddSingleton<IColorPalette>(new ColorPaletteViridis(-10, 30));
+            services.AddSingleton<IColorPalette>(new ColorPaletteJet(-10, 40));
         }
     }
 }
